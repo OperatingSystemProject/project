@@ -41,8 +41,8 @@ public class MainForm extends javax.swing.JFrame {
         jp.add(panel);  
         jScrollPane1.validate();
         jScrollPane1.repaint();
-        
-        
+        jScrollPane1.getHorizontalScrollBar().setOpaque(false);
+        jScrollPane1.getHorizontalScrollBar().setBackground(Color.red);
         
         
     }

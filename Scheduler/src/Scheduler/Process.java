@@ -37,6 +37,7 @@ public class Process extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

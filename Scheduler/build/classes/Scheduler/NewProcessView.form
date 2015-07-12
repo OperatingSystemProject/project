@@ -26,12 +26,12 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" pref="655" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -54,7 +54,7 @@
                   <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,8 +73,8 @@
                   <Color PropertyName="color" blue="99" green="99" red="0" type="rgb"/>
                 </LineBorder>
               </Border>
-              <Font PropertyName="font" name="Lucida Calligraphy" size="14" style="0"/>
-              <Color PropertyName="color" blue="66" green="66" red="0" type="rgb"/>
+              <Font PropertyName="font" name="Lucida Calligraphy" size="18" style="0"/>
+              <Color PropertyName="color" blue="99" green="99" red="0" type="rgb"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -83,14 +83,14 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="482" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel4" max="32767" attributes="0"/>
                               <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
@@ -113,13 +113,14 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -135,13 +136,13 @@
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="34" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -251,6 +252,21 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Process List">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder thickness="2">
+                  <Color PropertyName="color" blue="99" green="99" red="0" type="rgb"/>
+                </LineBorder>
+              </Border>
+              <Font PropertyName="font" name="Lucida Calligraphy" size="18" style="0"/>
+              <Color PropertyName="color" blue="99" green="99" red="0" type="rgb"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+      </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
@@ -267,6 +283,7 @@
                 <Column editable="true" title="I/O Waitings" type="java.lang.Object"/>
               </Table>
             </Property>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
