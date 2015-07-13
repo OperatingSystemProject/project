@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -21,7 +20,8 @@ import javax.swing.SwingUtilities;
  */
 public class MainForm extends javax.swing.JFrame {
     JPanel jp;
-    public ArrayList<Process> processList;
+    Scheduler scheduler;
+    Process process;
     /**
      * Creates new form MainForm
      */
@@ -239,7 +239,7 @@ public class MainForm extends javax.swing.JFrame {
                     jp.add(panel);  
                     jScrollPane1.validate();
                     jScrollPane1.repaint();
-                    
+                    process=panel;
                 }
             });
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -254,7 +254,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        process.run(1, 1);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

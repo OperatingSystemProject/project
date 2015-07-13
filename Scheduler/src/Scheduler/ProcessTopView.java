@@ -49,6 +49,7 @@ public class ProcessTopView extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(500, 60));
         setPreferredSize(new java.awt.Dimension(3059, 42));
 

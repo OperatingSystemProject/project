@@ -12,22 +12,41 @@ import java.util.ArrayList;
  * @author hp pc
  */
 public class ProcessDetail {
+    private final int SECOND_SCALE=1000; //number of milliseconds(True Time) in a second(Simulation Time)
     private String processId;
     private int arrivalTime;
     private int serviceTime;
     private ArrayList<IOWaiting> ioWaitingList;
     private int status;
+    private int timeRan;
 
     public ProcessDetail() {
     }
-
-    public ProcessDetail(String processId, int arrivalTime, int serviceTime, ArrayList<IOWaiting> ioInterrupts, int status) {
+    public ProcessDetail(String processId, int arrivalTime, int serviceTime, ArrayList<IOWaiting> ioWaitingList, int status) {
         this.processId = processId;
         this.arrivalTime = arrivalTime;
         this.serviceTime = serviceTime;
-        this.ioWaitingList = ioInterrupts;
+        this.ioWaitingList = ioWaitingList;
         this.status = status;
     }
+    
+    public ArrayList<IOWaiting> getIoWaitingList() {
+        return ioWaitingList;
+    }
+
+    public void setIoWaitingList(ArrayList<IOWaiting> ioWaitingList) {
+        this.ioWaitingList = ioWaitingList;
+    }
+
+    public int getTimeRan() {
+        return timeRan;
+    }
+    
+    public void setTimeRan(int timeRan) {
+        this.timeRan = timeRan;
+    }
+
+    
 
     public String getProcessId() {
         return processId;
