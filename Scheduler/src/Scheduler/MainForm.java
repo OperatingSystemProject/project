@@ -21,12 +21,15 @@ import javax.swing.SwingUtilities;
 public class MainForm extends javax.swing.JFrame {
     JPanel jp;
     Scheduler scheduler;
-    Process process;
+    ProcessView process;
     /**
      * Creates new form MainForm
      */
     public MainForm() {
         initComponents();
+        init();
+    }
+    public void init(){
         Container c=this.getContentPane();
         c.setBackground(Color.WHITE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -43,8 +46,16 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane1.repaint();
         jScrollPane1.getHorizontalScrollBar().setOpaque(false);
         jScrollPane1.getHorizontalScrollBar().setBackground(Color.red);
-        
-        
+        scheduler=new Scheduler();
+    }
+    public void init_process(){
+        int queueSize=scheduler.getProcessQueue().size();
+        ProcessQueue queue=scheduler.getProcessQueue();
+        for(int i=0;i<queueSize;i++){
+            jp.add(queue.get(i).getView());
+        }
+        jScrollPane1.validate();
+        jScrollPane1.repaint();
     }
 
     /**
@@ -235,7 +246,7 @@ public class MainForm extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {                    
-                    Process panel = new Process();                    
+                    ProcessView panel = new ProcessView(Color.RED,"Process ID");                    
                     jp.add(panel);  
                     jScrollPane1.validate();
                     jScrollPane1.repaint();
@@ -245,16 +256,16 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        NewProcessView processView=new NewProcessView(this, true);
+        NewProcessView processView=new NewProcessView(this, true, scheduler,this);
         processView.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        scheduler.pause();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        process.run(1, 1);
+        scheduler.play();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

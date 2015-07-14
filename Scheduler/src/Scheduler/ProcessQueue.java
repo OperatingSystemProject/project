@@ -5,6 +5,7 @@
  */
 package Scheduler;
 
+import Scheduler.Process;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +14,7 @@ import java.util.ArrayList;
  */
 public class ProcessQueue{
     ArrayList<Process> processQueue;
+    ArrayList<Process> tempProcessQueue;
 
     public ProcessQueue() {
         this.processQueue = new ArrayList<Process>();
@@ -32,5 +34,17 @@ public class ProcessQueue{
     
     public int size(){
         return processQueue.size();
+    }
+    public Process get(int i){
+        return processQueue.get(i);
+    }
+    public void sort(){
+        processQueue.sort(null);
+    }
+    public boolean isEmpty(){
+        return size()==0;
+    }
+    public Process peek(){
+        return processQueue.get(0);
     }
 }

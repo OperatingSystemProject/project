@@ -7,33 +7,53 @@ package Scheduler;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hp pc
  */
 public class NewProcessView extends javax.swing.JDialog {
-
+    private DefaultTableModel tableModel;
+    private MainForm parent;
+    private Scheduler scheduler;
+    
     /**
      * Creates new form NewProcessView
      */
-    public NewProcessView(java.awt.Frame parent, boolean modal) {
+    public NewProcessView(java.awt.Frame parent, boolean modal,Scheduler scheduler,MainForm parentForm) {
         super(parent, modal);
         initComponents();
+        this.parent=parentForm;
+        this.scheduler=scheduler;
+        init_Layout();
+    }
+    
+    public void init_Layout(){
         setLocationRelativeTo(null);
         Container c=this.getContentPane();
-        c.setBackground(Color.WHITE);
-        jTable1.setGridColor(Color.WHITE);
-        jTable1.setBackground(Color.red);
+        c.setBackground(Color.WHITE);        
+        jTable1.setBackground(Color.WHITE);
+        jTable1.setSelectionBackground(new Color(0, 153, 153));
+        jTable1.setSelectionForeground(Color.WHITE); 
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
         headerRenderer.setBackground(Color.WHITE);
+        headerRenderer.setHorizontalAlignment((int) CENTER_ALIGNMENT); 
         
-        for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
-                jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        jTable1.setDefaultRenderer(Object.class, headerRenderer);
+        tableModel=(DefaultTableModel) jTable1.getModel();
+        
+        
+        for (int i = 0; i < tableModel.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
         }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,14 +69,14 @@ public class NewProcessView extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        nameTxt = new javax.swing.JTextField();
+        arrivalTimeTxt = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        serviceTimeTxt = new javax.swing.JTextField();
+        addBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        submitBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -68,7 +88,7 @@ public class NewProcessView extends javax.swing.JDialog {
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("I/O waiting (from-to): ");
+        jLabel4.setText("I/O waiting Start Time: ");
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -82,17 +102,17 @@ public class NewProcessView extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Process Name: ");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        nameTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                nameTxtActionPerformed(evt);
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        arrivalTimeTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        arrivalTimeTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                arrivalTimeTxtActionPerformed(evt);
             }
         });
 
@@ -103,20 +123,20 @@ public class NewProcessView extends javax.swing.JDialog {
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        serviceTimeTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        serviceTimeTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                serviceTimeTxtActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 153, 153));
-        jButton1.setText("Add Process");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(0, 153, 153));
+        addBtn.setText("Add Process");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
@@ -125,26 +145,26 @@ public class NewProcessView extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(482, 482, 482)
-                        .addComponent(jButton1))
+                        .addGap(498, 498, 498)
+                        .addComponent(addBtn))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField3)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(arrivalTimeTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(serviceTimeTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18))
         );
@@ -154,26 +174,27 @@ public class NewProcessView extends javax.swing.JDialog {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(arrivalTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serviceTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153), 2), "Process List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Calligraphy", 0, 18), new java.awt.Color(0, 153, 153))); // NOI18N
 
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -181,14 +202,25 @@ public class NewProcessView extends javax.swing.JDialog {
             new String [] {
                 "Process", "Arrival", "Service", "I/O Waitings"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setGridColor(new java.awt.Color(0, 0, 0));
         jTable1.setOpaque(false);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Submit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                submitBtnActionPerformed(evt);
             }
         });
 
@@ -211,7 +243,7 @@ public class NewProcessView extends javax.swing.JDialog {
                 .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(submitBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addContainerGap())
@@ -225,7 +257,7 @@ public class NewProcessView extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(submitBtn)
                     .addComponent(jButton3))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -233,29 +265,63 @@ public class NewProcessView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_nameTxtActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void arrivalTimeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arrivalTimeTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_arrivalTimeTxtActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void serviceTimeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceTimeTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_serviceTimeTxtActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        String name=nameTxt.getText();
+        String arrivalTime=arrivalTimeTxt.getText();
+        String serviceTime=serviceTimeTxt.getText();
+        String iowaitingTime=jTextField3.getText();
+        
+        if(!name.equals("") && !arrivalTime.equals("") && !serviceTime.equals("")){
+            String[] rowData={name,arrivalTime,serviceTime,iowaitingTime};
+            tableModel.addRow(rowData);
+        }else{
+            JOptionPane.showMessageDialog(this, "One or More Required fields are not Filled");
+        }
+        
+        
+    }//GEN-LAST:event_addBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        try{
+            ProcessQueue processQueue=new ProcessQueue();
+            for(int i=0; i<tableModel.getRowCount();i++){
+                String processID=(String) tableModel.getValueAt(i, 0);
+                int arrivalTime=Integer.valueOf((String)tableModel.getValueAt(i, 1));
+                int serviceTime=Integer.valueOf((String)tableModel.getValueAt(i, 2));
+                ArrayList<Integer> ioList=new ArrayList<>();
+                String ioWaitings=(String) tableModel.getValueAt(i, 3);
+                StringTokenizer stringTokenizer=new StringTokenizer(ioWaitings, ", /.");
+                while(stringTokenizer.hasMoreTokens()){
+                    ioList.add(Integer.parseInt(stringTokenizer.nextToken()));
+                }
+                ProcessView processView=new ProcessView(Color.RED,processID);            
+                Process process=new Process(processID, arrivalTime, serviceTime, ioList, processView,"New");  
+                processQueue.enqueue(process);            
+            }
+            processQueue.sort();
+            scheduler.setProcessQueue(processQueue);
+            parent.init_process();
+            this.dispose();
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Some of your input types are wrong. Please verify and try again.");
+        }
+    }//GEN-LAST:event_submitBtnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
@@ -291,21 +357,21 @@ public class NewProcessView extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NewProcessView dialog = new NewProcessView(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+//                NewProcessView dialog = new NewProcessView(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JTextField arrivalTimeTxt;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -314,9 +380,9 @@ public class NewProcessView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField nameTxt;
+    private javax.swing.JTextField serviceTimeTxt;
+    private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
 }
