@@ -18,15 +18,14 @@ import javax.swing.Timer;
  */
 public class ProcessView extends javax.swing.JPanel {
     private Process process;    
-    private Color color;    
+        
     Timer timer; 
     int a=1;
     /**
      * Creates new form ProcessMiddleView
      */
     public ProcessView(Color color , String processName){
-        initComponents();
-        this.color=color;
+        initComponents();        
         this.jLabel2.setText(processName);
     }
     
@@ -35,17 +34,18 @@ public class ProcessView extends javax.swing.JPanel {
         return new Dimension(3090, 42); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void run(int quantum){ //quantum = the number of the quantum
-        JLabel current=cellList.get(quantum);
-        JLabel previous=cellList.get(quantum-1);
+    public void run(int timeSlot,Color color){ //quantum = the number of the timeSlot
+        JLabel current=cellList.get(timeSlot);
+        JLabel previous=cellList.get(timeSlot-1);
         int currentX=current.getX();
         int currentY=current.getY();
         int previousX=previous.getX();
         if(previousX!=currentX){
             previous.setLocation(current.getLocation());
         }
+        
         current.setBackground(color);   
-        timer=  new Timer(1000*Scheduler.quantumSize/32,new ActionListener() {                        
+        timer=  new Timer(1000/32,new ActionListener() {                        
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             while(!Scheduler.status.equals("play")){

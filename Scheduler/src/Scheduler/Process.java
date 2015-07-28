@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +27,7 @@ public class Process implements Comparable<Process>{
 
     public Process() {
     }
-    public Process(String processId, int arrivalTime, int serviceTime, ArrayList<Integer> ioWaitingList, ProcessView view, String status,Color color) {
+    public Process(String processId, int arrivalTime, int serviceTime, ArrayList<Integer> ioWaitingList, ProcessView view, String status, Color color) {
         this.processId = processId;
         this.arrivalTime = arrivalTime;
         this.serviceTime = serviceTime;
@@ -39,13 +40,11 @@ public class Process implements Comparable<Process>{
     public ProcessView getView() {
         return view;
     }
-    public void run(int quantum){
-        view.run(quantum);
+    public void run(int timeSlot){
+        view.run(timeSlot,color);
         timeRan++;
         if(timeRan==serviceTime){
            this.setStatus("finished");
-        }else if(ioWaitingList.contains(timeRan)){
-            this.setStatus("I/O Waiting");
         }
         
     }
@@ -101,7 +100,7 @@ public class Process implements Comparable<Process>{
     public void setStatus(String status) {
         this.status = status;
     }
-
+    
     @Override
     public int compareTo(Process o) {
         if(this.arrivalTime<o.arrivalTime) return -1;
@@ -111,3 +110,4 @@ public class Process implements Comparable<Process>{
     
     
 }
+
