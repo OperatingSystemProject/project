@@ -5,6 +5,7 @@
  */
 package Scheduler;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,7 @@ public class Process implements Comparable<Process>{
     private String status;
     private int timeRan=0;
     private ProcessView view;
+    private Color color;
     
 
     public Process() {

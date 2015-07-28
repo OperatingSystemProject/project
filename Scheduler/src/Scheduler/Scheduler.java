@@ -27,7 +27,7 @@ public class Scheduler implements ActionListener{
     Timer timer;
 
     public Scheduler() {      
-        timer=new Timer(quantumSize*2000, this);
+        timer=new Timer(quantumSize*1500, this);
     }
     public Scheduler(ProcessQueue processQueue) {
         this.processQueue=processQueue;
