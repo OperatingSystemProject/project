@@ -351,7 +351,7 @@ public class NewProcessView extends javax.swing.JDialog {
          
         
         if(!name.equals("") && !arrivalTime.equals("") && !serviceTime.equals("")){
-            Object[] rowData={name,arrivalTime,serviceTime,iowaitingTime,new Color(51,51,153)};
+            Object[] rowData={name,arrivalTime,serviceTime,iowaitingTime,color};
             tableModel.addRow(rowData);
             
             
