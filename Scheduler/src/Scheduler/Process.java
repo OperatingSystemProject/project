@@ -26,13 +26,14 @@ public class Process implements Comparable<Process>{
 
     public Process() {
     }
-    public Process(String processId, int arrivalTime, int serviceTime, ArrayList<Integer> ioWaitingList, ProcessView view, String status) {
+    public Process(String processId, int arrivalTime, int serviceTime, ArrayList<Integer> ioWaitingList, ProcessView view, String status,Color color) {
         this.processId = processId;
         this.arrivalTime = arrivalTime;
         this.serviceTime = serviceTime;
         this.ioWaitingList = ioWaitingList;
         this.status = status;
         this.view=view;
+        this.color=color;
     }
 
     public ProcessView getView() {

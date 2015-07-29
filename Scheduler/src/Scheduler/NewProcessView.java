@@ -6,11 +6,13 @@
 package Scheduler;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -80,6 +82,9 @@ public class NewProcessView extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         submitBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add New Process List");
@@ -218,11 +223,11 @@ public class NewProcessView extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Process", "Arrival", "Service", "I/O Waitings"
+                "Process", "Arrival", "Service", "I/O Waitings", "Color"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -249,22 +254,48 @@ public class NewProcessView extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Process Name: ");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Quantum Time:");
+        jLabel6.setName(""); // NOI18N
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField1.setText("quantum number");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(submitBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(submitBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
+                        .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(268, 268, 268)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(268, 268, 268)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,11 +304,19 @@ public class NewProcessView extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(submitBtn)
-                    .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(submitBtn)
+                        .addComponent(jButton3))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(335, 335, 335)
+                    .addComponent(jLabel5)
+                    .addContainerGap(335, Short.MAX_VALUE)))
         );
 
         pack();
@@ -304,10 +343,19 @@ public class NewProcessView extends javax.swing.JDialog {
         String arrivalTime=arrivalTimeTxt.getText();
         String serviceTime=serviceTimeTxt.getText();
         String iowaitingTime=jTextField3.getText();
+        Color color=jButton1.getBackground();
+        int red=color.getRed();
+        int green=color.getGreen();
+        int blue=color.getBlue();
+         
         
         if(!name.equals("") && !arrivalTime.equals("") && !serviceTime.equals("")){
-            String[] rowData={name,arrivalTime,serviceTime,iowaitingTime};
+            Object[] rowData={name,arrivalTime,serviceTime,iowaitingTime,new Color(51,51,153)};
             tableModel.addRow(rowData);
+            
+            
+            
+            
         }else{
             JOptionPane.showMessageDialog(this, "One or More Required fields are not Filled");
         }
@@ -324,12 +372,17 @@ public class NewProcessView extends javax.swing.JDialog {
                 int serviceTime=Integer.valueOf((String)tableModel.getValueAt(i, 2));
                 ArrayList<Integer> ioList=new ArrayList<>();
                 String ioWaitings=(String) tableModel.getValueAt(i, 3);
+                Color color=(Color)tableModel.getValueAt(i, 4);
+                int timeQuantum=Integer.parseInt(jTextField1.getText());
+                //scheduler.setTimeQuantum(timeQuantum);
+                
+                
                 StringTokenizer stringTokenizer=new StringTokenizer(ioWaitings, ", /.");
                 while(stringTokenizer.hasMoreTokens()){
                     ioList.add(Integer.parseInt(stringTokenizer.nextToken()));
                 }
                 ProcessView processView=new ProcessView(Color.RED,processID);            
-                Process process=new Process(processID, arrivalTime, serviceTime, ioList, processView,"New");  
+                Process process=new Process(processID, arrivalTime, serviceTime, ioList, processView,"New",color);  
                 processQueue.enqueue(process);            
             }
             processQueue.sort();
@@ -349,6 +402,10 @@ public class NewProcessView extends javax.swing.JDialog {
         Color color=JColorChooser.showDialog(this, "Choose color to identify the process", Color.yellow);
         jButton1.setBackground(color);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,9 +458,12 @@ public class NewProcessView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTextField serviceTimeTxt;
